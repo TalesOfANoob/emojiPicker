@@ -1,30 +1,14 @@
 /* eslint-disable prettier/prettier */
-import React,{useState} from 'react'
-import {View,StyleSheet,Text,TouchableOpacity} from 'react-native'
-import Icon  from 'react-native-vector-icons/Entypo'
-const HomeScreen = () =>{
+import React from 'react'
+import {View,StyleSheet,Text} from 'react-native'
+import EmojiPicker from '../components/EmojiPicker'
 
-    const [pressed,setPressed] = useState(false);
+const HomeScreen = () =>{
 
     return (
         <View style={styles.container}>
-            <View>
-                <Text style={styles.text}>Home Screen</Text>
-                { 
-                pressed ? <Text>Pressed</Text> : <Text>Not pressed</Text>
-                }
-                <TouchableOpacity 
-                onPress={()=>{
-                    if(!pressed)
-                        setPressed(true);
-                    else{
-                        setPressed(false);
-                    }
-                }} 
-                style={{alignSelf:"flex-end"}}>
-                    <Icon style={styles.icon} name="emoji-happy"/>
-                </TouchableOpacity>
-            </View>
+            <Text style={styles.text}>Home Screen {"\u{1F600}"}</Text>
+            <EmojiPicker/>
         </View>
     );
 }
@@ -43,11 +27,6 @@ const styles=StyleSheet.create({
         fontSize:25,
         padding:10,
         width:400,
-    },
-    icon:{
-        marginTop:5,
-        fontSize:25,
-        
     }
 
 })
