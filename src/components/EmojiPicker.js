@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
-import React,{useState,useCallback} from 'react';
+import React,{useState,useCallback,useRef} from 'react';
 import {View,Text,StyleSheet,TouchableOpacity,FlatList} from 'react-native';
 
-import Icon  from 'react-native-vector-icons/Entypo';
+import CommunityIcon  from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcon  from 'react-native-vector-icons/MaterialIcons';
 import * as EmojiJson from 'unicode-emoji-json/data-by-group.json';
 
 const getObjectKeys = ()=>{
@@ -12,30 +13,10 @@ const getObjectKeys = ()=>{
         keys.push(key);
     }
     keys.pop();
-    console.log(keys)
     return keys;
 };
 
-const createListHeader = () =>{
 
-    return (
-        
-        <FlatList
-        scrollEnabled={false}
-        numColumns={9}
-        data={[1,2,3,4,5,6,7,8,9]}
-        keyExtractor={(item,index)=>toString(item)+index}
-        renderItem={({item})=>{
-            return (
-            <TouchableOpacity style={styles.listHeaderItemStyle}>
-                <Text style={styles.listHeaderItemTextStyle}>{EmojiJson.Activities[1].emoji}</Text>
-            </TouchableOpacity>
-            );
-        }}
-        />
-        
-    );
-};
 
 
 const EmojiPicker = () =>{
@@ -43,6 +24,16 @@ const EmojiPicker = () =>{
 
     const [pressed,setPressed] = useState(false);
     const keys = getObjectKeys();
+    /*const pickerListRef=useRef(null);
+
+    const scrollWithRef = useCallback((index)=>{
+        
+        if(pickerListRef!=null)pickerListRef.current.scrollToIndex(1);
+        else{
+            return;
+        }
+    },[])*/
+
     const renderEmoji = useCallback(
         ({item})=>{
             return (
@@ -52,6 +43,7 @@ const EmojiPicker = () =>{
 
         }
     ,[]);
+
     const emojiKeyExtractor = useCallback(
         (item,index) => item.name + index
     ,[]);
@@ -64,9 +56,10 @@ const EmojiPicker = () =>{
             {//emoji list
             }
             <FlatList
+                
                 style={styles.emojiList}
                 ListHeaderComponent={
-
+                    
                     <Text style={styles.categoryHeader}>{key}</Text>
                 }
                 data={EmojiJson[key]}
@@ -78,6 +71,48 @@ const EmojiPicker = () =>{
         );
 
     },[emojiKeyExtractor,renderEmoji]);
+
+    const createListHeader = () =>{
+
+        const icons = [
+            {name:'emoticon-excited-outline',icon:'CommunityIcon'},
+            {name:'emoji-people',icon:'MaterialIcon'},
+            {name:'leaf',icon:'CommunityIcon'},
+            {name:'hamburger',icon:'CommunityIcon'},
+            {name:'airplane-takeoff',icon:'CommunityIcon'},
+            {name:'sports-soccer',icon:'MaterialIcon'},
+            {name:'dots-horizontal',icon:'CommunityIcon'},
+    ];
+        
+    
+        return (
+    
+            <FlatList
+            scrollEnabled={false}
+            numColumns={7}
+            data={["1","2","3","4","5","6","7"]}
+            keyExtractor={(item)=>item}
+            
+            renderItem={({item,index})=>{
+                return (
+                <TouchableOpacity 
+                    style={styles.listHeaderItemStyle}
+                    
+                >
+                    {
+                    icons[index].icon === 'CommunityIcon'
+                    ? <CommunityIcon style={styles.listHeaderItemTextStyle} name={icons[index].name}/>
+                    : <MaterialIcon style={styles.listHeaderItemTextStyle} name={icons[index].name}/>
+                    }
+    
+                </TouchableOpacity>
+                );
+            }}
+            />
+    
+        );
+    };
+
 
     return (<View>
         {
@@ -96,6 +131,7 @@ const EmojiPicker = () =>{
                 data={keys}
                 keyExtractor={(item)=>item}
                 renderItem={renderEmojiList}
+                
             />
 
         </View>
@@ -110,7 +146,7 @@ const EmojiPicker = () =>{
             }
         }}
         style={{alignSelf:'flex-end'}}>
-            <Icon style={styles.icon} name="emoji-happy"/>
+            <CommunityIcon style={styles.icon} name="emoticon-outline"/>
         </TouchableOpacity>
     </View>);
 };
@@ -158,19 +194,19 @@ const styles = StyleSheet.create({
         paddingLeft:11,
     },
     listHeaderStyle:{
-        flex:1,
-        justifyContent:"space-evenly",
-        backgroundColor:'grey',
+
+        justifyContent:'space-evenly',
+        backgroundColor:'#71EB71',
         flexGrow:1,
     },
     listHeaderItemStyle:{
         flexGrow:1,
-        
+
     },
     listHeaderItemTextStyle:{
-        fontSize:22,
-        textAlign:"center"
-    }
+        fontSize:30,
+        textAlign:'center',
+    },
 
 });
 
