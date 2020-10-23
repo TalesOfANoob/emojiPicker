@@ -17,9 +17,9 @@ const getJsonKeys = ()=>{
 const getSectionData = ()=>{
 
     const keys=getJsonKeys();
-    
     const sectionData = keys.map(key =>{
         const rowArray=[];
+        
         let i;
         const len=EmojiJson[key].length;
         for(i =0;i+6<=len;i+=6){
@@ -121,6 +121,8 @@ const Picker =()=>{
                     
                     return {length:24,offset:24*index,index};
                 }}
+               
+                windowSize={85}
                 
             />
         </View>
