@@ -1,9 +1,11 @@
-import React,{useContext} from 'react';
+import React from 'react';
 import {View,Text,StyleSheet,FlatList,TouchableOpacity} from 'react-native'
-import {Context as EmojiContext} from '../../context/EmojiContext'
-const EmojiList=()=>{
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {rmEmoji} from '../../redux/emojiActions'
+const EmojiList=({state,rmEmoji})=>{
 
-    const {state,rmEmoji} = useContext(EmojiContext);
+    
     return (
     <View style={styles.emojiListBar}>
         
@@ -54,4 +56,14 @@ const styles = StyleSheet.create({
 
 })
 
-export default EmojiList;
+const mapStateToProps=(state)=>{
+    return{
+        state
+    }
+}
+
+const matchDispatchToProps=(dispatch)=>{
+    return bindActionCreators({rmEmoji},dispatch);
+}
+
+export default connect(mapStateToProps,matchDispatchToProps)(EmojiList);

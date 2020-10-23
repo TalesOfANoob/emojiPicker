@@ -1,8 +1,9 @@
-import React,{useContext} from 'react'
-import {View,StyleSheet,Text,TouchableOpacity} from 'react-native'
-import {Context as EmojiContext} from '../../context/EmojiContext'
-const Emoji = ({emoji})=>{
-    const {addEmoji} = useContext(EmojiContext)
+import React from 'react'
+import {StyleSheet,Text,TouchableOpacity} from 'react-native'
+import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {addEmoji} from '../../redux/emojiActions'
+const Emoji = ({emoji,addEmoji})=>{
     
     return (
         <TouchableOpacity 
@@ -27,4 +28,7 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Emoji;
+const matchDispatchToProps=(dispatch)=>{
+    return bindActionCreators({addEmoji},dispatch);
+}
+export default connect(null,matchDispatchToProps)(Emoji);

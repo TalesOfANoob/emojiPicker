@@ -8,16 +8,17 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import MainNavigator from './src/navigation/MainNavigator'
-import {View } from 'react-native';
-import {Provider as EmojiProvider} from './src/context/EmojiContext'
+import {View} from 'react-native';
+import {Provider} from 'react-redux'
+import {store} from './src/redux/EmojiRedux'
 
 const App = () =>
 {
   return (
     <View style={{flex:1}}>
-      <EmojiProvider>
+      <Provider store={store}>
         <MainNavigator/>
-      </EmojiProvider>
+      </Provider>
     </View>
   );
 }

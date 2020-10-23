@@ -1,1 +1,1 @@
--->Replace Context With Redux
+-->Strip JSON Of Excess Data(i.e "fitzpatrick_scale": false,"version": "11.0")
