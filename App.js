@@ -9,12 +9,15 @@
 import React from 'react'
 import MainNavigator from './src/navigation/MainNavigator'
 import {View } from 'react-native';
+import {Provider as EmojiProvider} from './src/context/EmojiContext'
 
 const App = () =>
 {
   return (
     <View style={{flex:1}}>
-      <MainNavigator/>
+      <EmojiProvider>
+        <MainNavigator/>
+      </EmojiProvider>
     </View>
   );
 }

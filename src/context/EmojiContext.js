@@ -4,14 +4,18 @@ import createDataContext from './createDataContext';
 const EmojiReducer = (state,action)=>{
     switch (action.type){
         case 'add_emoji':
-
-            const index = state.findIndex((e)=>e.emoji === action.payload.emoji);
-            if (index !== -1){
-                return [...state,{emoji:action.payload.emoji,count:1}];
+            
+            const index = state.findIndex((e)=>{
+                
+                e.emojiCode === action.payload});
+            
+            if (index == -1){
+                return [...state,{emojiCode:action.payload,count:1}];
             }
             const copy = [...state];
             copy[index].count++;
-            return copy;
+            
+            return [...copy];
 
 
         default:
@@ -19,9 +23,9 @@ const EmojiReducer = (state,action)=>{
     }
 };
 
-const addEmoji = dispatch =>(emoji)=>{
-
-    dispatch({type:'add_emoji',payload:emoji});
+const addEmoji = dispatch =>(emojiCode)=>{
+    
+    dispatch({type:'add_emoji',payload:emojiCode});
 
 };
 
