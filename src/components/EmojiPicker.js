@@ -41,8 +41,9 @@ const EmojiPicker = () =>{
 
 
 const styles = StyleSheet.create({
+    
     iconHolder:{
-        flexShrink:1,
+        flex:0
     },
     icon:{
         marginTop:5,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     },
     emojiPicker:{
         flexDirection:'row',
-        marginHorizontal:10,
+        marginHorizontal:12,
     }
 
 

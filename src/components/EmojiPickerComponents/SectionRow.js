@@ -7,7 +7,7 @@ const SectionRow = ({data,_key})=>{
     //console.log(typeof data,_key);
     const jsx=[];
     for(let i=0;i<data.length;i++){
-        jsx.push(<Emoji key={_key+"_"+i}  emojiCode={data[i].emoji}/>);
+        jsx.push(<Emoji key={_key+"_"+i} emoji={data[i]}/>);
         
     }
     return <View style={styles.categoryRow}>{jsx}</View>

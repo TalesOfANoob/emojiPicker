@@ -1,36 +1,55 @@
 import React,{useContext} from 'react';
-import {View,Text,StyleSheet,FlatList} from 'react-native'
+import {View,Text,StyleSheet,FlatList,TouchableOpacity} from 'react-native'
 import {Context as EmojiContext} from '../../context/EmojiContext'
 const EmojiList=()=>{
 
-    const {state} = useContext(EmojiContext);
-    console.log(state);
+    const {state,rmEmoji} = useContext(EmojiContext);
     return (
     <View style={styles.emojiListBar}>
+        
         <FlatList
             style={styles.flatList}
             data={state}
             keyExtractor={(item,index)=>""+item.name+index}
             renderItem={({item})=>{
-                <Text>{item.emoji} {item.count}</Text>
+
+                return (
+                <TouchableOpacity
+                    onPress={()=>rmEmoji(item.emoji)}
+                >
+                    <Text style={styles.emojiStyle}>
+                        {item.emoji.emoji} {item.count}
+                    </Text>
+                </TouchableOpacity>
+                );
             }}
             horizontal
         />
     </View>)
 
 }
-
 const styles = StyleSheet.create({
 
     
     emojiListBar:{
-        flexGrow:1,
-        justifyContent:"flex-start",
-        textAlignVertical:"center",
-        
+        flex:1,
+        borderRadius:20,
+        overflow:'hidden',
+        marginTop:1,
     },
     flatList:{
-        flexGrow:1,
+        flex:1,
+        
+    },
+    emojiStyle:{
+        fontSize:17,
+        textAlignVertical:"center",
+        marginLeft:2,
+        paddingHorizontal:5,
+        borderWidth:1,
+        borderRadius:20,
+        borderColor:'grey',
+        backgroundColor:'#C8FFBB',
     }
 
 })

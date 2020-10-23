@@ -1,14 +1,15 @@
 import React,{useContext} from 'react'
 import {View,StyleSheet,Text,TouchableOpacity} from 'react-native'
 import {Context as EmojiContext} from '../../context/EmojiContext'
-const Emoji = ({emojiCode})=>{
+const Emoji = ({emoji})=>{
     const {addEmoji} = useContext(EmojiContext)
+    
     return (
         <TouchableOpacity 
         style={styles.emojiHolder}
-        onPress={()=>addEmoji(emojiCode)}
+        onPress={()=>addEmoji(emoji)}
         >
-            <Text style={styles.emojiStyle}>{emojiCode}</Text>
+            <Text style={styles.emojiStyle}>{emoji.emoji}</Text>
         </TouchableOpacity>
         )
 }
