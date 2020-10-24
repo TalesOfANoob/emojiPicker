@@ -15,10 +15,7 @@ const SectionRow = ({data,_key})=>{
 
 const styles = StyleSheet.create({
     categoryRow:{
-        flexDirection:'row',
-        flexGrow:1,
-        padding:0,
-        margin:0,
+        flexDirection:'row',        
     },
 });
 

@@ -17,13 +17,11 @@ const Emoji = ({emoji,addEmoji})=>{
 
 const styles = StyleSheet.create({
     emojiHolder:{
-        flexGrow:1,
-        borderRadius:50,
+        width:50,
     }
     ,
     emojiStyle:{
         fontSize:25,
-        
         textAlign:'center',
     },
 })

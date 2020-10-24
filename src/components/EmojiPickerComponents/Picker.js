@@ -121,7 +121,7 @@ const Picker =()=>{
                     
                     return {length:24,offset:24*index,index};
                 }}
-                initialNumToRender={8}
+                initialNumToRender={9}
                 windowSize={85}
                 
             />
@@ -151,14 +151,11 @@ const styles = StyleSheet.create({
         
     },
     listHeaderStyle:{
-
-        justifyContent:'space-evenly',
         backgroundColor:'#71EB71',
-        flexGrow:1,
         flexDirection:'row'
     },
     listHeaderItemStyle:{
-        flexGrow:1,
+        width:42.85
 
     },
     listHeaderItemTextStyle:{
