@@ -2,7 +2,7 @@ import React,{useRef,useCallback} from 'react'
 import {StyleSheet,View,Text,TouchableOpacity,SectionList} from 'react-native'
 import CommunityIcon  from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon  from 'react-native-vector-icons/MaterialIcons';
-import * as EmojiJson from '../../resources/data-by-group.json'
+import * as EmojiJson from '../../resources/data-by-group-stripped-minified.json'
 import SectionRow from './SectionRow';
 
 const getJsonKeys = ()=>{
@@ -121,7 +121,7 @@ const Picker =()=>{
                     
                     return {length:24,offset:24*index,index};
                 }}
-               
+                initialNumToRender={8}
                 windowSize={85}
                 
             />
