@@ -137,10 +137,13 @@ const styles = StyleSheet.create({
         position:'absolute',
         left:70,
         top:30,
+        zIndex:1,
         borderRadius:10,
         borderWidth:1,
         borderColor:'grey',
         overflow:'hidden',
+        backgroundColor:'white',
+
         
     },
     categoryHeader:{

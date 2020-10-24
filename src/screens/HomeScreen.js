@@ -7,7 +7,9 @@ const HomeScreen = () =>{
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Home Screen {"\u{1F600}"}</Text>
+            <Text style={styles.text}>Text 1</Text>
+            <EmojiPicker/>
+            <Text style={styles.text}>Text 2</Text>
             <EmojiPicker/>
         </View>
     );
