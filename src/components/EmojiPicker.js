@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
-import React,{useState,useContext} from 'react';
+import React,{useState} from 'react';
 import {View,Text,StyleSheet,TouchableOpacity} from 'react-native';
-import {Context as EmojiContext} from '../context/EmojiContext'
 import CommunityIcon  from 'react-native-vector-icons/MaterialCommunityIcons';
 import Picker from './EmojiPickerComponents/Picker'
 import EmojiList from './EmojiPickerComponents/EmojiList'
