@@ -17,13 +17,7 @@ const EmojiPicker = ({onSelectClose}) =>{
     close = onSelectClose;
     const coords = [];
     return (<View style={styles.emojiPicker}
-            onLayout={
-                event =>{
-                    const layout = event.nativeEvent.layout;
-                    coords.push(layout.x,layout.y);
-                    
-                }
-            }
+
     >
         {
 

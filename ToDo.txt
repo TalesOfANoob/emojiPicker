@@ -1,1 +1,1 @@
--->Strip JSON Of Excess Data(i.e "fitzpatrick_scale": false,"version": "11.0")
+--> check to see if there is enough space at the bottom for picker to fit otherwise show picker above the emojiPicker icon
