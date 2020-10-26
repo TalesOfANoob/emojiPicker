@@ -201,8 +201,8 @@ const Picker = ({coords})=>{
                 showsVerticalScrollIndicator={false}
                 style={styles.pickerList}
                 getItemLayout={(data,index)=>{
-
-                    return {length:24,offset:24 * index,index};
+                    const l = RFValue(24);
+                    return {length:l,offset:l * index,index};
                 }}
                 initialNumToRender={9}
                 windowSize={85}
