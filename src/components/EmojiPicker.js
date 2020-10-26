@@ -2,26 +2,31 @@
 import React,{useState,useCallback} from 'react';
 import {View,StyleSheet,TouchableOpacity} from 'react-native';
 import CommunityIcon  from 'react-native-vector-icons/MaterialCommunityIcons';
-import Picker from './EmojiPickerComponents/Picker'
-import EmojiList from './EmojiPickerComponents/EmojiList'
+import Picker from './EmojiPickerComponents/Picker';
+import EmojiList from './EmojiPickerComponents/EmojiList';
+import { RFValue } from 'react-native-responsive-fontsize';
 
-let callback=null;
-let close=null;
+let callback = null;
+let close = null;
 
 const EmojiPicker = ({onSelectClose}) =>{
 
-    
+
     const [pressed,setPressed] = useState(false);
     callback = useCallback(setPressed,[]);
-    close=onSelectClose;
-    return (<View style={styles.emojiPicker}>
+    close = onSelectClose;
+    const coords = [];
+    return (<View style={styles.emojiPicker}
+
+    >
         {
-        pressed 
+
+        pressed
         ? <Picker/>
         : null
         }
 
-        <EmojiList/>
+        <EmojiList coords={coords}/>
 
         <TouchableOpacity
             onPress={()=>{
@@ -42,26 +47,26 @@ const EmojiPicker = ({onSelectClose}) =>{
 
 
 const styles = StyleSheet.create({
-    
+
     iconHolder:{
-        flex:0
+        flex:0,
     },
     icon:{
-        marginTop:5,
-        fontSize:25,
-        
+        marginTop:'25%',
+        fontSize:RFValue(30),
+
     },
     emojiPicker:{
         flexDirection:'row',
-        marginHorizontal:12,
-    }
+        marginHorizontal:'4%',
+    },
 
 
 });
 
-EmojiPicker.defaultProps={
-        onSelectClose:true 
-}
+EmojiPicker.defaultProps = {
+        onSelectClose:true,
+};
 
 export {callback,close};
 export default EmojiPicker;
