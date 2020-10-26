@@ -213,8 +213,8 @@ const Picker =()=>{
 const styles = StyleSheet.create({
 
     picker:{
-        width:300,
-        height:300,
+        width:"80%",
+        height:"970%",
         position:'absolute',
         left:70,
         top:30,
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     },
 
     listHeaderItemStyle:{
-        width:42.85
+        width:37.5,
 
     },
     listHeaderItemTextStyle:{
