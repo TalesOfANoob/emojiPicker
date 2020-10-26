@@ -1,17 +1,19 @@
 /* eslint-disable prettier/prettier */
-import React,{useState} from 'react';
-import {View,Text,StyleSheet,TouchableOpacity} from 'react-native';
+import React,{useState,useCallback} from 'react';
+import {View,StyleSheet,TouchableOpacity} from 'react-native';
 import CommunityIcon  from 'react-native-vector-icons/MaterialCommunityIcons';
 import Picker from './EmojiPickerComponents/Picker'
 import EmojiList from './EmojiPickerComponents/EmojiList'
 
-const EmojiPicker = () =>{
+let callback=null;
+let close=null;
+
+const EmojiPicker = ({onSelectClose}) =>{
 
     
     const [pressed,setPressed] = useState(false);
-    
-
-    
+    callback = useCallback(setPressed,[]);
+    close=onSelectClose;
     return (<View style={styles.emojiPicker}>
         {
         pressed 
@@ -57,4 +59,9 @@ const styles = StyleSheet.create({
 
 });
 
+EmojiPicker.defaultProps={
+        onSelectClose:true 
+}
+
+export {callback,close};
 export default EmojiPicker;

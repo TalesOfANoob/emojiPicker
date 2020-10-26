@@ -40,8 +40,9 @@ const getSectionData = ()=>{
 
 const Picker =()=>{
 
+    
     const sectionListRef=useRef(null);
-    const sectionData=getSectionData();
+    const sectionData=getSectionData(); 
     const scroll = useCallback((index)=>{
         
         if(sectionListRef.current){
