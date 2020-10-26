@@ -1,5 +1,6 @@
-import React,{useRef,useCallback} from 'react'
-import {StyleSheet,View,Text,TouchableOpacity,SectionList} from 'react-native'
+import React,{useRef,useCallback, useState} from 'react'
+import {StyleSheet,View,Text,TouchableOpacity,SectionList,TextInput} from 'react-native'
+
 import CommunityIcon  from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon  from 'react-native-vector-icons/MaterialIcons';
 import * as EmojiJson from '../../resources/data-by-group-stripped-minified.json'
@@ -14,9 +15,56 @@ const getJsonKeys = ()=>{
     return keys;
 }
 
-const getSectionData = ()=>{
+const getSectionData = (name)=>{
 
     const keys=getJsonKeys();
+
+    if(name!=""){
+        let allData= [...EmojiJson[keys[0]]];
+        for(let i=1;i<keys.length;i++){
+            
+            allData = allData.concat(EmojiJson[keys[i]]);
+        }
+        
+        const filteredData=allData.filter((e)=>
+        {
+            
+            const args = e.name.split("_");
+            
+            for( let i=0;i<args.length;i++){
+                
+                if(args[i].includes(name)){
+                    
+                    return true;
+                }
+            }
+            return false;
+        
+        })
+
+        const genRows = ()=>{
+            const key ="Results";
+            const rowArray =[];
+            let i;
+            const len=filteredData.length;
+            for(i =0;i+6<=len;i+=6){
+                rowArray.push({data:filteredData.slice(i,i+6),key:""+key+"_"+rowArray.length});
+            }
+            
+            if(len-i>0){
+                
+                rowArray.push({data:filteredData.slice(i,len),key:""+key+"_"+rowArray.length});
+            }
+            
+            
+            return rowArray;
+        }
+
+        const sectionData=[{data:genRows(),title:"Results"}];
+        return sectionData;
+
+    }else{
+
     const sectionData = keys.map(key =>{
         const rowArray=[];
         
@@ -33,16 +81,21 @@ const getSectionData = ()=>{
         
         
         return {data:rowArray,title:key}
+
     });
-    
     return sectionData;
+    }
+    
+    
 };
 
 const Picker =()=>{
 
     
     const sectionListRef=useRef(null);
-    const sectionData=getSectionData(); 
+    const [search,setSearch] = useState(false);
+    const [name,setName] =useState("");
+    const sectionData=getSectionData(name); 
     const scroll = useCallback((index)=>{
         
         if(sectionListRef.current){
@@ -60,6 +113,7 @@ const Picker =()=>{
     const createListHeader = () =>{
         
         const icons = [
+            {},
             {name:'emoticon-excited-outline',icon:'CommunityIcon'},
             {name:'emoji-people',icon:'MaterialIcon'},
             {name:'leaf',icon:'CommunityIcon'},
@@ -69,14 +123,32 @@ const Picker =()=>{
             {name:'dots-horizontal',icon:'CommunityIcon'},
     ];
         let jsx=[];
+        jsx.push(
 
-        for (let i =0;i<icons.length;i++){
+            <TouchableOpacity
+                key={search+"_"+0}
+                style={styles.listHeaderItemStyle}
+                onPress={()=>{
+                    if(search == true){
+                        setSearch(false)
+                    }else{
+
+                        setSearch(true)
+                    
+                    }
+                }}
+
+            >
+                <MaterialIcon  style={styles.listHeaderItemTextStyle} name="search" />
+            </TouchableOpacity>
+        )
+        for (let i =1;i<icons.length;i++){
             const e = icons[i];
             jsx.push(
                     <TouchableOpacity
                         key={e.name+"_"+i}
                         style={styles.listHeaderItemStyle}
-                        onPress={()=>scroll(i)}
+                        onPress={()=>scroll(i-1)}
                         >
                         {
                         e.icon === 'CommunityIcon'
@@ -95,6 +167,14 @@ const Picker =()=>{
         <View  style={styles.picker}>
             
             <View style={styles.listHeaderStyle}>{createListHeader()}</View>
+            {search 
+            ? <TextInput 
+                    style={styles.input}
+                    placeholder="Search"
+                    onChangeText={(text)=>setName(text)}
+                />
+            : null
+            }
             <SectionList
                 ref={sectionListRef}
                 sections={sectionData}
@@ -154,10 +234,12 @@ const styles = StyleSheet.create({
         paddingLeft:11,
         
     },
+    
     listHeaderStyle:{
         backgroundColor:'#71EB71',
         flexDirection:'row'
     },
+
     listHeaderItemStyle:{
         width:42.85
 
@@ -166,6 +248,16 @@ const styles = StyleSheet.create({
         fontSize:30,
         textAlign:'center',
     },
+    input:{
+        width:300,
+        height:24,
+        fontSize:20,
+        textAlignVertical:'center',
+        padding:0,
+        paddingLeft:11,
+        margin:0,
+        borderColor:'grey',
+    }
 })
 
 export default Picker;
