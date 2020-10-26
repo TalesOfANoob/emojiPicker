@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 
     },
     emojiStyle:{
-        fontSize:RFValue(17),
+        fontSize:RFValue(18),
         textAlignVertical:'center',
         marginLeft:4,
         paddingHorizontal:5,

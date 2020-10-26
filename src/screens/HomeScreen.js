@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
 
 
     container:{
+        backgroundColor:'white',
         alignSelf:'center',
         justifyContent:'center',
         width:'100%',
