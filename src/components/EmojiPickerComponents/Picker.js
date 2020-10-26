@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     },
 
     listHeaderItemStyle:{
-        width:37.5,
+        width:'12.5%',
 
     },
     listHeaderItemTextStyle:{
