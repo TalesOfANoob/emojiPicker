@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React,{useState,useCallback} from 'react';
+import React,{useState,useCallback,useRef} from 'react';
 import {View,StyleSheet,TouchableOpacity} from 'react-native';
 import CommunityIcon  from 'react-native-vector-icons/MaterialCommunityIcons';
 import Picker from './EmojiPickerComponents/Picker';
@@ -13,8 +13,10 @@ const EmojiPicker = ({onSelectClose}) =>{
 
 
     const [pressed,setPressed] = useState(false);
+    const iconRef = useRef(null);
     callback = useCallback(setPressed,[]);
     close = onSelectClose;
+
     const coords = [];
     return (<View style={styles.emojiPicker}
 
@@ -38,7 +40,14 @@ const EmojiPicker = ({onSelectClose}) =>{
             }}
             style={styles.iconHolder}
         >
-            <CommunityIcon style={styles.icon} name="emoticon-outline"/>
+            <CommunityIcon
+                ref={iconRef}
+                onLayout={(event)=>{
+                if ( iconRef.current)
+                    {iconRef.current.measureInWindow((x,y)=>{
+                        console.log(x,y);
+                });}
+            }} style={styles.icon} name="emoticon-outline"/>
 
         </TouchableOpacity>
 
